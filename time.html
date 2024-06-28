@@ -1,0 +1,74 @@
+<html>
+<head>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    color: #fff;
+}
+
+.time {
+    font-family: Verdana, sans-serif;
+    font-size: 10vw;
+    text-align: center;
+}
+
+.date {
+    font-family: Verdana, sans-serif;
+    font-size: 5vw;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="time">
+        <span class="cl_hours"></span>:<span class="cl_minutes"></span>:<span class="cl_seconds"></span>
+    </div>
+    <div class="date">
+        <span class="cl_day"></span><span class="cl_month"></span><span class="cl_year"></span>
+    </div>
+</div>
+
+<script>
+var hoursElement = document.querySelector(".cl_hours");
+var minutesElement = document.querySelector(".cl_minutes");
+var secondsElement = document.querySelector(".cl_seconds");
+var dateElement = document.querySelector(".cl_day");
+var monthElement = document.querySelector(".cl_month");
+var yearElement = document.querySelector(".cl_year");
+
+function updateClock() {
+    var date = new Date();
+    hoursElement.textContent = formatNumber(date.getHours());
+    minutesElement.textContent = formatNumber(date.getMinutes());
+    secondsElement.textContent = formatNumber(date.getSeconds());
+    dateElement.textContent = formatNumber(date.getDate());
+    monthElement.textContent = "." + formatNumber(date.getMonth() + 1);
+    yearElement.textContent = "." + date.getFullYear();
+}
+
+function formatNumber(number) {
+    return (number < 10 ? '0' + number : number);
+}
+
+// Uhr aktualisieren
+setInterval(updateClock, 1000);
+</script>
+
+</body>
+</html>
