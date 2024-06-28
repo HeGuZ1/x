@@ -1,0 +1,50 @@
+<html>
+<head>
+	<title>QR Code Generator</title>
+</head>
+<body>
+<div style="text-align: center;" class="generator-container">
+        <h1>QR Code Generator</h1>
+        
+        <label for="info-input">Information:</label><br /><br />
+       <textarea id="info-input" rows="5" placeholder="Enter your information"></textarea>
+        <br /><br />
+        <label for="color-input">PX Color:</label>
+        <input type="color" id="color-input" value="#000000">
+        
+        <br /><br /><label for="bgcolor-input">BG Color:</label>
+        <input type="color" id="bgcolor-input" value="#FFFFFF">
+        <br /><br />
+      <label for="size-input">Size:</label>
+        <input type="number" id="size-input" min="100" max="1000" step="100" value="200">
+        <br /><br />
+        <div class="button-container">
+            <button onclick="generateQRCode()">Generate QR Code</button>
+        </div>
+        <br /><br />
+        <div class="qrcode-container">
+            <img id="qrcode-image" alt="QR Code">
+        </div>
+    </div><p></p>
+    
+    <script>
+        function generateQRCode() {
+            var info = document.getElementById("info-input").value;
+            var color = document.getElementById("color-input").value;
+            var bgcolor = document.getElementById("bgcolor-input").value;
+            var size = parseInt(document.getElementById("size-input").value);
+            
+            var link = "https://api.qrserver.com/v1/create-qr-code/?";
+            link += "color=" + encodeURIComponent(color.substr(1));
+            link += "&bgcolor=" + encodeURIComponent(bgcolor.substr(1));
+            link += "&data=" + encodeURIComponent(info);
+            link += "&size=" + size + "x" + size;
+            link += "&ecc=L";
+            link += "&qzone=1"; // Set qzone parameter to 1
+            
+            var qrcodeImage = document.getElementById("qrcode-image");
+            qrcodeImage.src = link;
+        }
+    </script>
+    </body>
+</html>
